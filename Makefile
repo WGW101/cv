@@ -1,8 +1,10 @@
 WD=./temp
 INSTD="$(HOME)/Seafile/GBono Thesis"
 TEXC=pdflatex
-OPT=-halt-on-error -output-directory=$(WD)
-TRGT=cv-en.pdf
+BIBC=biber
+TEXOPT=-halt-on-error -output-directory=$(WD)
+BIBOPT=-input-directory=$(WD) -output-directory=$(WD)
+TRGT=cv-en.pdf long-cv-fr.pdf
 DEP=$(wildcard ./icons/*.png)
 
 all: $(TRGT)
@@ -10,9 +12,12 @@ all: $(TRGT)
 install: $(TRGT)
 	cp $< $(INSTD)
 
-%.pdf : %.tex $(DEP)
+$(WD):
 	mkdir -p $(WD)
-	$(TEXC) $(OPT) $<
+
+%.pdf : %.tex $(DEP) | $(WD)
+	$(TEXC) $(TEXOPT) $<
+	$(TEXC) $(TEXOPT) $<
 	mv $(WD)/$@ .
 
 .PHONY: clean mrproper
