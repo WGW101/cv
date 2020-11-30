@@ -3,9 +3,14 @@
 \usepackage{xcolor}
 \usepackage{graphicx}
 \newcommand{\useicon}[2][8pt]{\includegraphics[height=#1]{./icons/#2.png}}
+\usepackage{amssymb}
 
 \usepackage{tabularx}
 \usepackage{hyperref}
+\hypersetup{
+    pdftitle={Candidature a la Qualification aux Fonctions de Maitre de Conferences},
+    bookmarks=true
+}
 \newcommand{\mailto}[2]{\href{mailto:#2}{\color{blue}{#1}~\useicon{mail}}}
 \newcommand{\linkto}[2]{\href{#2}{\color{purple}{#1}~\useicon{link}}}
 \newcommand{\jumpto}[2]{\hyperref[#2]{\color{cyan!70!black}{#1}~\useicon{jump}}}
@@ -175,10 +180,12 @@
     \section*{\useicon[12pt]{teach}~Activit{\'e}s d'Enseignement}
     \label{sec:teach}
 
-    \colorbox{red!10}{\parbox{.98\textwidth}{
-        \small
-        J'ai men{\'e} l'ensemble de mes activit{\'e}s d'enseignement au sein du d{\'e}partement T{\'e}l{\'e}communication (TC) de l'{\bf INSA Lyon}.
+    \colorbox{green!10}{\parbox{.98\textwidth}{
+        \small\itshape
+        \hspace{7mm}J'ai men{\'e} l'ensemble de mes activit{\'e}s d'enseignement au sein du d{\'e}partement T{\'e}l{\'e}communication (TC) de l'{\bf INSA Lyon}.
         Je m'adressais donc {\`a} des {\bf {\'e}l{\`e}ves ing{\'e}nieurs} de niveaux {\'e}quivalents {\bf L3 {\`a} M2}.
+        Cette section liste et d{\'e}taille le contenu de chaque cours dont j'ai particip{\'e} {\`a} l'encadrement,
+        ainsi que mon implication dans chacun d'eux.
     }}
 
     \subsection*{R{\'e}capitulatif des heures d'enseignement dispens{\'e}es}
@@ -396,4 +403,142 @@
 
     \section*{\useicon[12pt]{research}~Activit{\'e}s de Recherche}
     \label{sec:research}
+
+    \colorbox{green!10}{\parbox{.98\textwidth}{
+        \small\itshape
+        \hspace{7mm}La poursuite de mon doctorat, portant sur le sujet de la planification de tourn{\'e}es de v{\'e}hicules (VRP)
+        dans un contexte multi-agent dynamique et stochastique, constitue ma principale activit{\'e} de recherche.
+        Au cours de ces travaux, nous nous sommes pench{\'e}s sur l'application des m{\'e}thodes d'apprentissage par renforcement (RL)
+        -- et en particulier l'apprentissage par renforcement profond (Deep RL) -- dans le contexte du VRP.
+        Cette section r{\'e}sume les diff{\'e}rentes contributions de ma th{\`e}se, en commencant par une liste de mes publications,
+        puis en revenant sur chacune d'entre elle afin d'en d{\'e}tailler le contenu.
+    }}
+
+    \subsection*{Liste de publications}
+
+    \subsubsection*{Revue internationale avec comit{\'e} de lecture}
+    \colorbox{yellow!30}{
+        \begin{tabularx}{.97\textwidth}{>{\raggedleft\small}p{.18\textwidth} c X}
+            Titre       &: &``Solving Multi-Agent Routing Problems using Deep Attention Mechanisms'' \\
+            Auteurs     &: &G. Bono, J. Dibangoye, O. Simonin, L. Matignon, F. Pereyron \\
+            Revue       &: &IEEE Transactions on Intelligent Transportation Systems \\
+            Date        &: &Juillet 2020 \\
+            Publication &: &IEEE \\
+            Pages       &: &1 -- 10 \\
+            DOI         &: &\linkto{10.1109/TITS.2020.3009289}{https://doi.org/10.1109/TITS.2020.3009289} \\
+            $\checkmark$   & &\bf joint au dossier de candidature \\
+        \end{tabularx}
+        \label{ref:trans:its}
+    }
+
+    \subsubsection*{Conf{\'e}rence internationale avec comit{\'e} de lecture}
+    \colorbox{yellow!30}{
+        \begin{tabularx}{.97\textwidth}{>{\raggedleft\small}p{.18\textwidth} c X}
+            Titre          &: &``Cooperative Multi-Agent Policy Gradient'' \\
+            Auteurs        &: &G. Bono, J. Dibangoye, L. Matignon, F. Pereyron, O. Simonin \\
+            Conf{\'e}rence &: &European Conference on Machine Learning (ECML) \\
+            Date           &: &Septembre 2018 \\
+            Lieu           &: &Dublin, Irelande \\
+            Actes          &: &``Machine Learning and Knowledge Discovery in Databases'' \\
+            Editeurs       &: &M. Berlingerio, F. Bonchi, T. G{\"a}rtner, N. Hurley, G. Ifrim \\
+            Publication    &: &Springer \\
+            Pages          &: &459 -- 476 \\
+            DOI            &: &\linkto{10.1007/978-3-030-10925-7\_28}{https://doi.org/10.1007/978-3-030-10925-7\_28} \\
+            $\checkmark$   & &\bf joint au dossier de candidature \\
+        \end{tabularx}
+        \label{ref:ecml}
+    }
+
+    \subsubsection*{Conf{\'e}rences nationales avec comit{\'e} de lecture}
+    \colorbox{yellow!30}{
+        \begin{tabularx}{.97\textwidth}{>{\raggedleft\small}p{.18\textwidth} c X}
+            Titre          &: &``Classification des probl{\`e}mes stochastiques et dynamiques de collectes et de livraisons par des v{\'e}hicules intelligents'' \\
+            Auteurs        &: &G. Bono, J. Dibangoye, L. Matignon, F. Pereyron, O. Simonin \\
+            Conf{\'e}rence &: &Journ{\'e}es Francophones sur la Planification, la D{\'e}cision et l’Apprentissage (JFPDA) \\
+            Date           &: &Juillet 2017 \\
+            Lieu           &: &Caen, France \\
+            Pages          &: &5 -- 15 \\
+            URL            &: &\linkto{https://hal.inria.fr/hal-01576351}{https://hal.inria.fr/hal-01576351} \\
+            $\checkmark$   & &\bf joint au dossier de candidature \\
+        \end{tabularx}
+        \label{ref:jfpda:17}
+    }
+
+    \vspace{5mm}
+    \colorbox{yellow!10}{
+        \begin{tabularx}{.97\textwidth}{>{\raggedleft\small}p{.18\textwidth} c X}
+            Titre          &: &``Sur le Gradient de la Politique pour les Syst{\`e}mes Multi-Agents Coop{\'e}ratifs'' \\
+            Auteurs        &: &G. Bono, J. Dibangoye, L. Matignon, F. Pereyron, O. Simonin \\
+            Conf{\'e}rence &: &Journ{\'e}es Francophones sur la Planification, la D{\'e}cision et l’Apprentissage (JFPDA) \\
+            Date           &: &Juillet 2018 \\
+            Lieu           &: &Nancy, France \\
+            Pages          &: &45 -- 57 \\
+            URL            &: &\linkto{https://hal.inria.fr/JFPDA2018/hal-01840852}{https://hal.inria.fr/JFPDA2018/hal-01840852} \\
+        \end{tabularx}
+        \label{ref:jfpda:18}
+    }
+
+    \subsubsection*{Atelier international avec comit{\'e} de lecture}
+    \colorbox{yellow!10}{
+        \begin{tabularx}{.97\textwidth}{>{\raggedleft\small}p{.18\textwidth} c X}
+            Titre          &: &``SULFR: Simulation of Urban Logistics for Reinforcement'' \\
+            Auteurs        &: &G. Bono, J. Dibangoye, L. Matignon, F. Pereyron, O. Simonin \\
+            Atelier        &: &Prediction and Generative Modeling in Reinforcement Learning \\
+            Conf{\'e}rence &: &Federated AI Meeting (AAMAS + ICML + IJCAI) \\
+            Date           &: &Juillet 2018 \\
+            Lieu           &: &Stockholm, Su{\`e}de \\
+            URL            &: &\linkto{http://reinforcement-learning.ml/papers/pgmrl2018\_bono.pdf}{http://reinforcement-learning.ml/papers/pgmrl2018\_bono.pdf} \\
+        \end{tabularx}
+        \label{ref:pgmrl}
+    }
+
+    \subsubsection*{Rapport de recherche}
+    \colorbox{yellow!10}{
+        \begin{tabularx}{.97\textwidth}{>{\raggedleft\small}p{.18\textwidth} c X}
+            Titre          &: &``On the Study of Cooperative Multi-Agent Policy Gradient'' \\
+            Auteurs        &: &G. Bono, J. Dibangoye, L. Matignon, F. Pereyron, O. Simonin \\
+            Date           &: &Juin 2018 \\
+            URL            &: &\linkto{https://hal.inria.fr/hal-01821677}{https://hal.inria.fr/hal-01821677} \\
+        \end{tabularx}
+        \label{ref:rapport}
+    }
+
+    \subsection*{Contexte}
+
+    \subsection*{Positionnement et {\'etat} de l'art}
+    \jumpto{article JFPDA 2017}{ref:jfpda:17}
+    
+    \subsection*{Apprentissage multi-agent b{\'e}n{\'e}ficiant d'une phase d'entra{\^i}nement commune}
+    \jumpto{article ECML 2018}{ref:ecml}
+    \jumpto{article JFPDA 2018}{ref:jfpda:18}
+    \jumpto{rapport de recherche}{ref:rapport}
+
+    \subsection*{Mod{\`e}le de prises de d{\'e}cisions s{\'e}quentielles}
+
+    \subsection*{Architecture profonde de politique pour le VRP}
+    \jumpto{article Trans. ITS 2020}{ref:trans:its}
+
+    \subsection*{Perspectives de recherche}
+    \jumpto{article PGMRL 2018}{ref:pgmrl}
+
+    \section*{\useicon[12pt]{perso}~Responsabilit{\'e}s collectives}
+    \colorbox{yellow!20}{
+        \begin{tabularx}{.97\textwidth}{>{\raggedleft\small}p{.18\textwidth} c X}
+            {\'E}v{\'e}nement &: &PhD-day des doctorants du CITI \\
+            R{\^o}le          &: &Co-organisation (recherche de financement, contact services comm.) \\
+            Date              &: &Octobre 2017 \\
+            URL               &: &\linkto{http://phd-day.citi-lab.fr/2017}{http://phd-day.citi-lab.fr/2017} \\
+        \end{tabularx}
+    }
+
+    \vspace{5mm}
+    \colorbox{yellow!20}{
+        \begin{tabularx}{.97\textwidth}{>{\raggedleft\small}p{.18\textwidth} c X}
+            {\'E}v{\'e}nement &: &Institut d'Automne en Intelligence Artificielle du GdR IA \\
+            R{\^o}le          &: &Assistance {\`a} l'organisation et {\`a} la logistique \\
+            Dates             &: &Novembre 2017 et Octobre 2019 \\
+            URL               &: &\linkto{http://ia2.gdria.fr}{http://ia2.gdria.fr} \\
+            Responsable       &: &\mailto{Christine Solnon}{christine.solnon@insa-lyon.fr} \\
+        \end{tabularx}
+    }
 \end{document}
