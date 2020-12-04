@@ -625,7 +625,22 @@
     Celle-ci permet d'entra{\^i}ner et d'{\'e}valuer notre approche dans des sc{\'e}narii plus r{\'e}alistes.
 
     \subsection*{Perspectives de recherches}
-    
+
+    \hspace{7mm}Nous avons plusieurs pistes pour {\'e}tendre et rafiner notre approche.
+    D'abord, il serait int{\'e}ressant de consid{\'e}rer comment les avantages d'un entra{\^i}nement commun pourrait impacter
+    une structure hi{\'e}rarchique de politique, dans laquelle la prise de d{\'e}cision est r{\'e}partie entre plusieurs niveaux,
+    par exemple dans notre cas entre un dispatcher central, des dispatchers de quartier, et des v{\'e}hicules ind{\'e}pendants.
+
+    \hspace{7mm}Ensuite, si notre approche permet d'apprendre de bout en bout une politique {\`a} partir d'{\'e}chantillons,
+    il serait pertinent d'int{\'e}grer des heuristiques apprises par (Deep) RL {\`a} des meta-heuristiques plus classiques
+    comme les algorithmes g{\'e}n{\'e}tiques ou les approches par concensus sur un ensemble de plan.
+    En effet, le Deep RL offre la possibilit{\'e} d'{\'e}chantillonner tr{\`e}s rapidement un grand nombre de solutions,
+    et pourrait avantageusement fournir des candidats ou des {\'e}valuations approch{\'e}es {\`a} d'autres heuristiques de recherche.
+
+    \hspace{7mm}Enfin, pour s'adapter {\`a} un environnement plus r{\'e}aliste et favoriser les transferts de politique d'un ville {\`a} une autre,
+    il serait int{\'e}ressant de rafiner l'encodeur des clients pour plus efficacement apprendre {\`a} repr{\'e}senter des graphes quelconque.
+    On pourrait ainsi repr{\'e}senter directement le r{\'e}seau routier, plus {\'e}parse, ou bien faire porter par les arr{\^e}tes du graphe de clients
+    des informations sur les co{\^u}ts et temps de trajet (ce que ne permet pas notre encodeur actuel).
 
     \section*{\useicon[12pt]{perso}~Responsabilit{\'e}s collectives}
     \colorbox{yellow!20}{
