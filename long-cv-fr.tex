@@ -32,7 +32,7 @@
 
     \noindent
     \begin{minipage}{.09\textwidth}
-        \includegraphics[width=\textwidth]{./photo_gbo_bio.jpg}
+        \includegraphics[width=\textwidth]{./pics/photo_gbo_bio.jpg}
     \end{minipage}
     \begin{minipage}{.44\textwidth}
         \fcolorbox{black}{blue!10}{
@@ -504,10 +504,61 @@
     }
 
     \subsection*{Contexte}
+    \hspace{7mm}Cette th{\`e}se a {\'e}t{\'e} men{\'e}e avec le soutien de la chaire INSA-Volvo.
+    Au cours de ces derni{\`e}res ann{\'e}es, le groupe Volvo a beaucoup investi dans la recherche sur les v{\'e}hicules autonomes et l'intelligence artificielle.
+    Ils cherchent {\`a} mieux r{\'e}pondre aux besoins de leurs clients, en particulier en logistique urbaine.
+    En effet, cette derni{\`e}re repr{\'e}sente un d{\'e}fi {\'e}conomique majeur, avec des densit{\'e}s de population qui augmentent,
+    saturent les infrastructures routi{\`e}res existantes,
+    et provoquent une forte concurrence pour l'espace disponible entre les diff{\'e}rents usagers
+    (v{\'e}hicules, stationnement, pi{\'e}tons, cyclistes, transports en commun, \dots).
+    Par ailleurs, les habitudes de consommation {\'e}voluent elles-aussi,
+    avec l'av{\`e}nement de l'e-commerce, de la livraison le jour-m{\^e}me, ou du transport {\`a} la demande.
+
+    \hspace{7mm}Dans cette th{\`e}se, nous nous proposons d'{\'e}tudier comment optimiser les tourn{\'e}es d'une flotte de v{\'e}hicules de livraison
+    dans ces milieux urbains incertains et dynamiques.
+    En particulier, nous souhaitons {\'e}tudier comment tirer parti de l'exp{\'e}rience accumul{\'e}e lors de tourn{\'e}es pr{\'e}c{\'e}dentes
+    pour permettre {\`a} nos v{\'e}hicules d'apprendre {\`a} r{\'e}agir {\`a} des situations nouvelles, dans d'autres villes,
+    avec des configurations de clients diff{\'e}rentes et des conditions de circulations variables.
 
     \subsection*{Positionnement et {\'etat} de l'art}
-    \jumpto{article JFPDA 2017}{ref:jfpda:17}
-    
+    \hspace{7mm}Les probl{\`e}mes de planification de tourn{\'e}es (ou VRP en anglais) sont apparus dans la litt{\'e}rature scientifique depuis les ann{\'e}es soixante,
+    voire m{\^e}me encore plus t{\^o}t si l'on consid{\`e}re que le probl{\`e}me du voyageur de commerce (TSP) en est une variante.
+    Principalement {\'e}tudi{\'e} en recherche op{\'e}rationnelle (OR), le VRP a {\'e}t{\'e} {\'e}tendu {\`a} une large gamme de contraintes,
+    et il existe une tr{\`e}s grande variet{\'e} d'approches pour r{\'e}soudre toutes ces variantes.
+    Nous nous int{\'e}ressons particuli{\`e}rement aux VRP dynamiques et stochastiques (DS-VRP) qui capturent le fait que la configurations des clients est variable,
+    que les temps et les co{\^u}ts de trajet sont incertains, et que de nouveaux clients peuvent appara{\^i}tre en cours de route.
+    Dans un \jumpto{article}{ref:jfpda:17} pr{\'e}sent{\'e} aux JFPDA en 2017, nous proposons une taxonomie des diff{\'e}rentes variantes de VRP
+    qui correspondent {\`a} notre contexte, comme illustr{\'e} en Figure~\ref{fig:vrp:taxo}.
+    Nous y dressons {\'e}galement un {\'e}tat de l'art des approches classiques pour r{\'e}soudre les DS-VRP.
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=.8\textwidth]{./figures/vrp-taxonomy.pdf}
+        \caption{Taxonomie des VRP adapt{\'e}s {\`a} la planification de tourn{\'e}es en milieu urbain. \\
+        Seules les variantes non-gris{\'e}es ont {\'e}t{\'e} retenues par la suite.}
+        \label{fig:vrp:taxo}
+    \end{figure}
+
+    \hspace{7mm}Ces approches classiques ne permettent pas la g{\'e}n{\'e}ralisation d'une instance du probl{\`e}me {\`a} une autre,
+    et n'exploitent pas l'information qu'il est possible d'extraire d'exp{\'e}riences pass{\'e}es
+    pour anticiper les ph{\'e}nom{\`e}nes dynamiques et stochastiques afin de mieux y r{\'e}agir.
+    R{\'e}cemment, les approches bas{\'e}es sur l'apprentissage par renforcement (RL) sont en plein essor,
+    en particulier celles issues du RL profond (Deep RL). Elles utilisent des r{\'e}seaux de neurones (DNN)
+    qui permettent d'apprendre des repr{\'e}sentations riches lorsque les variables d'{\'e}tats d{\'e}crivant l'{\'e}volution du syst{\`e}me
+    forment des structures complexes. Dans notre cas, nous devons repr{\'e}senter un ensemble de clients {\`a} servir et leur configuration,
+    sous forme de graphe, ainsi que la progression des v{\'e}hicules parmi eux.
+    N{\'e}anmoins, les travaux existants de Deep RL appliqu{\'e} aux VRP ne prennent pas en compte le caract{\`e}re multi-agent du probl{\`e}me,
+    et ne permettent pas de produire des r{\`e}gles de d{\'e}cision dynamiques pour l'ensemble de la flotte
+    lorsque plusieurs v{\'e}hicules sont d{\'e}ploy{\'e}s en m{\^e}me temps.
+
+    \hspace{7mm}Dans cette th{\`e}se, nous proposons d'abord d'{\'e}tudier comment un ensemble d'agents peut b{\'e}n{\'e}ficier
+    d'une phase d'apprentissage commune tout en pr{\'e}servant leur capacit{\'e} {\`a} agir ind{\'e}pendamment.
+    Nous {\'e}tudions ensuite comment mod{\'e}liser les DS-VRP sous la forme de processus d{\'e}cisionnel de Markov (MDP)
+    en permettant aux diff{\'e}rents agents d'agir de fa{\c c}on asynchrone.
+    Enfin, nous proposons une architecture de DNN bas{\'e}e sur des m{\'e}canismes d'attention (AM) exploitant la structure
+    de l'espace d'{\'e}tat, capable de g{\'e}n{\'e}raliser {\`a} diff{\'e}rentes configurations de clients
+    et de fournir des r{\`e}gles de d{\'e}cision dynamiques {\`a} n'importe quel v{\'e}hicule de la flotte.
+
     \subsection*{Apprentissage multi-agent b{\'e}n{\'e}ficiant d'une phase d'entra{\^i}nement commune}
     \jumpto{article ECML 2018}{ref:ecml}
     \jumpto{article JFPDA 2018}{ref:jfpda:18}

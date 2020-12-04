@@ -1,0 +1,75 @@
+\documentclass[tikz, crop, margin=2mm]{standalone}
+
+\begin{document}
+\begin{tikzpicture}
+    \fill[red!20] (-7, 4) rectangle (0, 1.5);
+    \fill[green!20] (0, 4) rectangle (7, 1.5);
+
+	\begin{scope}[opacity=0.5]
+		\node[circle, inner sep=3mm] (info evol) at (-2.5, 2.5) {vs.};
+		\node (static) at (info evol.north west) {Static};
+		\node[font=\footnotesize\itshape, anchor=south] (evol lbl) at (info evol.north) {Information evolution};
+		\node[font=\footnotesize\itshape, align=left] (dyna var) at (-6, 2.5) {$\bullet$ travel times \\ $\bullet$ customers};
+	
+		\node[circle, inner sep=3mm] (info qual) at (2.5, 2.5) {vs.};
+		\node (deterministic) at (info qual.north west) {Deterministic};
+		\node[font=\footnotesize\itshape, anchor=south] (qual lbl) at (info qual.north) {Information quality};
+		\node[font=\footnotesize\itshape, align=left] (stoch var) at (6, 2.5) {$\bullet$ travel times \\ $\bullet$ demands \\ $\bullet$ customers};
+	\end{scope}
+	\node (dynamic) at (info evol.south east) {Dynamic};
+	\node (stochastic) at (info qual.south east) {Stochastic};
+
+	\begin{scope}[opacity=0.5]
+		\draw (dyna var.north east) -- (dyna var.south east);
+		\draw (dyna var.south east) |- (dynamic);
+	
+		\draw (stoch var.north west) -- (stoch var.south west);
+		\draw (stoch var.west |- stochastic) -- (stochastic);
+	\end{scope}
+
+	\node[draw, very thick, inner sep=3mm, font=\bf] (VRP) at (0, 0) {VRP};
+
+	\begin{scope}[opacity=0.5]
+		\node (eVRP) at (-3, -2) {eVRP};
+		\node[font=\footnotesize\itshape, anchor=north, align=center] at (eVRP.south)
+			{electric Vehicles \\ (aka. green VRP)};
+
+		\draw[->, >=latex] (VRP) -- (eVRP);
+	\end{scope}
+
+	\node (CVRP) at (0, -2) {CVRP};
+	\node[font=\footnotesize\itshape, anchor=north] at (CVRP.south)
+		{Capacitated Vehicles};
+
+	\node (VRPTW) at (3, -2) {VRPTW};
+	\node[font=\footnotesize\itshape, anchor=north] at (VRPTW.south)
+		{with Time Windows};
+
+	\begin{scope}[opacity=0.5]
+		\node[draw, inner sep=3mm] (TSP) at (-6, 0) {TSP};
+		\node[font=\footnotesize\itshape, anchor=south, align=center] at (TSP.north)
+			{Travelling Salesman \\ (single-vehicle)};
+	
+		\node[draw, inner sep=3mm] (PDP) at (6, 0) {PDP};
+		\node[font=\footnotesize\itshape, anchor=south] at (PDP.north) {Pickup and Delivery};
+		\node[draw, inner sep=3mm] (DARP) at (8, -1) {DARP};
+		\node[font=\footnotesize\itshape, anchor=south] at (DARP.north) {Dial A Ride};
+
+		\node (PDPT) at (6, -2) {PDPT};
+		\node[font=\footnotesize\itshape, align=center, anchor=north] at (PDPT.south)
+			{with Transfers};
+			
+		\draw[->, >=latex] (TSP) -- (VRP);
+		\draw[->, >=latex] (VRP) -- (PDP);
+		\draw[->, >=latex] (PDP.-60) |- (DARP);
+
+		\draw[->, >=latex] (PDP) -- (PDPT);
+	\end{scope}
+
+	\draw[->, >=latex] (VRP) -- (dynamic.south);
+	\draw[->, >=latex] (VRP) -- (stochastic.south -| deterministic);
+
+	\draw[->, >=latex] (VRP) -- (CVRP);
+	\draw[->, >=latex] (VRP) -- (VRPTW);
+\end{tikzpicture}
+\end{document}
