@@ -15,6 +15,9 @@
 \newcommand{\linkto}[2]{\href{#2}{\color{purple}{#1}~\useicon{link}}}
 \newcommand{\jumpto}[2]{\hyperref[#2]{\color{cyan!70!black}{#1}~\useicon{jump}}}
 
+\usepackage{biblatex}
+\addbibresource{../manuscript/cleaned_biblio.bib}
+
 \setlength{\parindent}{0pt}
 \setlength{\tabcolsep}{1mm}
 \hyphenpenalty=10000
@@ -560,17 +563,69 @@
     et de fournir des r{\`e}gles de d{\'e}cision dynamiques {\`a} n'importe quel v{\'e}hicule de la flotte.
 
     \subsection*{Apprentissage multi-agent b{\'e}n{\'e}ficiant d'une phase d'entra{\^i}nement commune}
-    \jumpto{article ECML 2018}{ref:ecml}
-    \jumpto{article JFPDA 2018}{ref:jfpda:18}
-    \jumpto{rapport de recherche}{ref:rapport}
+    \hspace{7mm}Le RL permet de d{\'e}crire tr{\`e}s naturellement les syst{\`e}mes dynamiques et stochastiques,
+    et mod{\'e}lise l'objectif {\`a} optimiser sous la forme d'un signal de r{\'e}compense per{\c c}u {\`a} chaque d{\'e}cision.
+    Il existe plusieurs classes de m{\'e}thodes permettant de trouver des politiques
+    maximisant l'esp{\'e}rance de la r{\'e}compense accumul{\'e}e dans le temps.
+    Dans un \jumpto{article}{ref:ecml} publi{\'e} {\`a} ECML en 2018, nous pr{\'e}sentons un algorithme d{\'e}coulant des m{\'e}thodes ``Acteur-Critique''
+    appell{\'e} Actor Critic for Decentralized Control (ACDC). Celui-ci permet {\`a} plusieurs agents d'optimiser leurs politiques individuelles
+    {\`a} partir d'une {\'e}valuation commune. Nos contributions d{\'e}veloppent le cadre formel de ce type d'approches pour les syst{\`e}mes multi-agents
+    o{\`u} il est possible de collecter de l'information commune {\`a} l'entra{\^i}nement.
+    Nous {\'e}valuons l'approche sur un ensemble de bancs de test typique de la litt{\'e}rature.
+    Nous montrons un net avantage {\`a} utiliser une {\'e}valuation commune plut{\^o}t que d'entra{\^i}ner les agents compl{\`e}tement ind{\'e}pendamment.
+    Cette publication s'accompagne d'un \jumpto{rapport de recherche}{ref:rapport} contenant les preuves des th{\'e}or{\`e}mes
+    ainsi que quelques d{\'e}veloppements suppl{\'e}mentaires sur les politiques stationnaires et un parall{\`e}le avec le gradient naturel.
+    Ces travaux font aussi l'objet d'un \jumpto{article}{ref:jfpda:18} pr{\'e}sent{\'e} en fran{\c c}ais aux JFPDA en 2018.
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=\textwidth]{./figures/smmdp.pdf}
+        \caption{Trajectoire d'un simple VRP avec $2$ v{\'e}hicules mod{\'e}lis{\'e} comme un sMMDP.}
+        \label{fig:smmdp}
+    \end{figure}
 
     \subsection*{Mod{\`e}le de prises de d{\'e}cisions s{\'e}quentielles}
+    \hspace{7mm}En RL, les mod{\`e}les multi-agents consid{\`e}rent souvent une prise de d{\'e}cision synchronis{\'e}e entre tous les agents.
+    Pour mieux d{\'e}crire la dynamique d'un VRP, dans lequel les actions entreprises par les v{\'e}hicules ne se terminent pas au m{\^e}me moment,
+    nous proposons une nouvelle variante de MDP multi-agent s{\'e}quentiel (sMMDP).
+    Un exemple de trajectoire {\'e}chantillonn{\'e} depuis ce mod{\`e}le sMMDP est pr{\'e}sent{\'e} en Figure~\ref{fig:smmdp}.
+    Dans ce mod{\`e}le, nous consid{\'e}rons que les effets des actions individuelles sur l'{\'e}tat global du syst{\`e}me
+    ainsi que le signal de r{\'e}compense qui y est associ{\'e} peuvent {\^e}tre isol{\'e}s.
+    Ainsi, nous d{\'e}composons la prise de d{\'e}cision en {\'e}tape individuelle.
+    Un seul v{\'e}hicule agit {\`a} un pas de temps donn{\'e}, l'ordre dans lequel les v{\'e}hicules agissent n'est pas pr{\'e}d{\'e}fini
+    mais est d{\'e}duit de la dynamique du syst{\`e}me.
+    N{\'e}anmoins, le signal de r{\'e}compense cumul{\'e} reste partag{\'e}, les agents poursuivent donc toujours un objectif commun.
+    Nous introduisons cette variante de MDP dans un \jumpto{article}{ref:trans:its} publi{\'e} dans la revue IEEE Transactions on ITS en 2020,
+    accompagn{\'e} de l'architecture de DNN que nous utiliserons comme politique pr{\'e}sent{\'e}e ci-apr{\`e}s.
 
     \subsection*{Architecture profonde de politique pour le VRP}
-    \jumpto{article Trans. ITS 2020}{ref:trans:its}
+    \hspace{7mm}Mod{\'e}lis{\'e} sous la forme d'un sMMDP, nous pouvons identifi{\'e} une d{\'e}composition de l'{\'e}tat d'un VRP en quatre facteurs: \\
+    \textbullet~l'{\'e}tat des clients, sous la forme d'un graphe, {\'e}chantillonn{\'e} d{\`e}s le d{\'e}but d'une trajectoire,
+        et compl{\'e}t{\'e} {\`a} intervalles irr{\'e}guliers par l'apparition de nouveaux clients; \\
+    \textbullet~l'{\'e}tat de chaque v{\'e}hicule, permettant de traquer leurs progressions; \\
+    \textbullet~une variable de ``tour'', indiquant quel v{\'e}hicule en particulier est en attente d'un nouvelle d{\'e}cision; \\
+    \textbullet~un masque binaire permettant de filtrer quels clients peuvent {\^e}tre servis par le v{\'e}hicule courrant.
 
-    \subsection*{Perspectives de recherche}
-    \jumpto{article PGMRL 2018}{ref:pgmrl}
+    \hspace{7mm}Comme il n'est pas possible d'avoir un repr{\'e}sentation exhaustive d'une politique de d{\'e}cision
+    pour tous les {\'e}tats possible du syst{\`e}me, nous proposons une architecture de politique approch{\'e}e sous la forme d'un DNN appel{\'e}e MARDAM,
+    reposant sur des m{\'e}canismes d'attention.
+    Elle se d{\'e}compose en quatre modules correspondant chacun {\`a} un facteur de l'{\'e}tat, comme repr{\'e}sent{\'e}e en Figure~\ref{fig:mardam}.
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=.6\textwidth]{./figures/mardam.pdf}
+        \caption{Architecture MARDAM comme politique pour les DS-VRP.}
+        \label{fig:mardam}
+    \end{figure}
+
+    \hspace{7mm}Nous {\'e}valuons MARDAM sur plusieurs bancs de test artificiel en la comparant {\`a} diff{\'e}rentes m{\'e}thodes existante.
+    Nous pr{\'e}sentons des r{\'e}sultats prometteurs qui tendent {\`a} montrer la robustesse et la flexibilit{\'e} de notre approche.
+    Nous avons {\'e}galement d{\'e}velopp{\'e} une interface entre MARDAM et le simulateur micro-traffic SUMO,
+    que nous d{\'e}crivons dans un \jumpto{article}{ref:pgmrl} pr{\'e}sent{\'e} dans un atelier lors du regroupement de conf{\'e}rence FAIM en 2018.
+    Celle-ci permet d'entra{\^i}ner et d'{\'e}valuer notre approche dans des sc{\'e}narii plus r{\'e}alistes.
+
+    \subsection*{Perspectives de recherches}
+    
 
     \section*{\useicon[12pt]{perso}~Responsabilit{\'e}s collectives}
     \colorbox{yellow!20}{

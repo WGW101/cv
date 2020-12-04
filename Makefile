@@ -19,8 +19,13 @@ $(WD):
 	$(TEXC) $(TEXOPT) $<
 	mv $(WD)/$(notdir $@) ./figures
 
-%.pdf : %.tex $(ICONS) $(FIGS) | $(WD)
+long-cv-fr.pdf: long-cv-fr.tex $(ICONS) $(FIGS) | $(WD) 
 	$(TEXC) $(TEXOPT) $<
+	$(BIBC) $(BIBOPT) long-cv-fr
+	$(TEXC) $(TEXOPT) $<
+	mv $(WD)/$@ .
+
+cv-en.pdf : cv-en.tex $(ICONS) | $(WD)
 	$(TEXC) $(TEXOPT) $<
 	mv $(WD)/$@ .
 
